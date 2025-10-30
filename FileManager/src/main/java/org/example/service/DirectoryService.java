@@ -1,20 +1,33 @@
 package org.example.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DirectoryService {
+
+    public void createDirectory(String path) throws IOException {
+        File dir = new File(path);
+        if (dir.mkdirs()) {
+            System.out.println("Папка создана: " + dir.getAbsolutePath());
+        } else {
+            if (dir.exists()) {
+                throw new IOException("Папка уже существует: " + path);
+            } else {
+                throw new IOException("Не удалось создать папку: " + path);
+            }
+        }
+    }
+
     public List<String> readDirectory(String path) throws IOException {
         File directory = new File(path);
         if (!directory.exists()) {
-            throw new IOException("Directory not found");
+            throw new IOException("Directory not found: " + path);
         }
 
         if (!directory.isDirectory()) {
-            throw new IOException("Not a directory");
+            throw new IOException("Not a directory: " + path);
         }
 
         File[] files = directory.listFiles();
@@ -35,7 +48,7 @@ public class DirectoryService {
         File directory = new File(path);
 
         if (!directory.exists()) {
-            throw new FileNotFoundException("Folder not found: " + path);
+            throw new IOException("Folder not found: " + path);
         }
 
         if (!directory.isDirectory()) {

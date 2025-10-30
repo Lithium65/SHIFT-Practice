@@ -45,12 +45,7 @@ public class Runner {
                 switch (choice) {
                     case 1 -> {
                         String fileName = FileNameGenerator.generateFileName(zoneId);
-                        File file = new File(fileName);
-                        if (file.createNewFile()) {
-                            System.out.println("Файл создан: " + file.getAbsolutePath());
-                        } else {
-                            System.out.println("Файл уже существует: " + file.getAbsolutePath());
-                        }
+                        fileService.createFileWithAutoName(fileName);
                     }
                     case 2 -> {
                         System.out.print("Введите путь к файлу: ");
@@ -68,7 +63,7 @@ public class Runner {
                         System.out.print("Введите путь к файлу: ");
                         File file = new File(scanner.nextLine().trim());
                         List<String> lines = fileService.readFileText(file);
-                        System.out.println("--- Содержимое файла ---");
+                        System.out.println("Содержимое файла");
                         lines.forEach(System.out::println);
                     }
                     case 4 -> {
@@ -86,12 +81,7 @@ public class Runner {
                     case 6 -> {
                         System.out.print("Введите путь к папке: ");
                         String path = scanner.nextLine().trim();
-                        File dir = new File(path);
-                        if (dir.mkdirs()) {
-                            System.out.println("Папка создана: " + dir.getAbsolutePath());
-                        } else {
-                            System.out.println("Не удалось создать папку (возможно, уже существует)");
-                        }
+                        directoryService.createDirectory(path);
                     }
                     case 7 -> {
                         System.out.print("Введите путь к папке: ");
@@ -102,7 +92,7 @@ public class Runner {
                         System.out.print("Введите путь к папке: ");
                         String path = scanner.nextLine().trim();
                         List<String> items = directoryService.readDirectory(path);
-                        System.out.println("--- Содержимое папки ---");
+                        System.out.println("Содержимое папки");
                         items.forEach(System.out::println);
                     }
                     case 9 -> {
