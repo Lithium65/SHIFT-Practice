@@ -12,13 +12,17 @@ public class SenderNotificationDecorator implements NotificationSender {
 
     private final NotificationSender notificationSender;
 
-    private final NotificationType notificationType;
-
     @Override
     public void sendNotification() {
+        NotificationType notificationType = getNotificationType();
         log.info("Задан тип уведомления: {}", notificationType);
         notificationSender.sendNotification();
-        log.info("Уведомления типа {} было успешно отправлено", notificationType);
+        log.info("Уведомления типа {} было успешно отправлено", getNotificationType());
+    }
+
+    @Override
+    public NotificationType getNotificationType() {
+        return notificationSender.getNotificationType();
     }
 
 }

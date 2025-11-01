@@ -17,4 +17,5 @@ public class SenderResolver {
     public NotificationSender getSender(NotificationType type) {
         return senderMap.get(type);
     }
+
 }

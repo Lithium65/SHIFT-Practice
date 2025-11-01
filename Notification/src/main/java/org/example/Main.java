@@ -13,7 +13,8 @@ public class Main {
         SenderResolver senderResolver = new SenderResolver(new SignInSenderFactory());
 
         NotificationSender notificationSender = senderResolver.getSender(NotificationType.SMS);
-        SenderNotificationDecorator senderNotificationDecorator = new SenderNotificationDecorator(notificationSender, NotificationType.SMS);
+        SenderNotificationDecorator senderNotificationDecorator =
+                new SenderNotificationDecorator(notificationSender);
 
         senderNotificationDecorator.sendNotification();
     }
