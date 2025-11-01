@@ -1,39 +1,15 @@
-package org.example.service;
+package org.example.service.impl;
 
 import org.example.exception.FileManagerException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class DirectoryService {
-    public List<String> readDirectory(String path) throws IOException {
-        File directory = new File(path);
-        if (!directory.exists()) {
-            throw new FileManagerException("Directory not found");
-        }
 
-        if (!directory.isDirectory()) {
-            throw new FileManagerException("Not a directory");
-        }
-
-        File[] files = directory.listFiles();
-        List<String> result = new ArrayList<>();
-        if (files != null) {
-            for (File file : files) {
-                String name = file.getName();
-                if (file.isDirectory()) {
-                    name += "/";
-                }
-                result.add(name);
-            }
-        }
-        return result;
-    }
-
-    public void deleteDirectory(String path) throws FileManagerException {
+    public void deleteDirectory(String path) throws IOException {
         File directory = new File(path);
 
         if (!directory.exists()) {
@@ -55,7 +31,7 @@ public class DirectoryService {
         }
     }
 
-    void deleteFiles(File[] contents) throws FileManagerException {
+    void deleteFiles(File[] contents) throws IOException {
         if (contents != null) {
             for (File file : contents) {
                 if (file.isDirectory()) {
@@ -68,4 +44,5 @@ public class DirectoryService {
             }
         }
     }
+
 }
