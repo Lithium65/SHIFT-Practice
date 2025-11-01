@@ -9,7 +9,7 @@ import org.example.sender.impl.SmsSender;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignInSenderFactory implements SenderFactory {
+public class SignInSenderFactory implements SenderFactory{
 
     private final Map<NotificationType, NotificationSender>  senderMap;
 
