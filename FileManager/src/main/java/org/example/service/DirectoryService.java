@@ -9,14 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DirectoryService {
+
+    public void createDirectory(String path) throws IOException {
+        File dir = new File(path);
+        if (dir.mkdirs()) {
+            System.out.println("Папка создана: " + dir.getAbsolutePath());
+        } else {
+            if (dir.exists()) {
+                throw new IOException("Папка уже существует: " + path);
+            } else {
+                throw new IOException("Не удалось создать папку: " + path);
+            }
+        }
+    }
+
     public List<String> readDirectory(String path) throws IOException {
         File directory = new File(path);
         if (!directory.exists()) {
-            throw new FileManagerException("Directory not found");
+            throw new IOException("Directory not found");
         }
 
         if (!directory.isDirectory()) {
-            throw new FileManagerException("Not a directory");
+            throw new IOException("Not a directory");
         }
 
         File[] files = directory.listFiles();
@@ -33,15 +47,15 @@ public class DirectoryService {
         return result;
     }
 
-    public void deleteDirectory(String path) throws FileManagerException {
+    public void deleteDirectory(String path) throws IOException {
         File directory = new File(path);
 
         if (!directory.exists()) {
-            throw new FileManagerException("Folder not found: " + path);
+            throw new FileNotFoundException("Folder not found: " + path);
         }
 
         if (!directory.isDirectory()) {
-            throw new FileManagerException("The specified path is not a folder: " + path);
+            throw new IllegalArgumentException("The specified path is not a folder: " + path);
         }
 
         File[] contents = directory.listFiles();
@@ -51,18 +65,18 @@ public class DirectoryService {
         if (directory.delete()) {
             System.out.println("Folder is deleted: " + path);
         } else {
-            throw new FileManagerException("Folder could not be deleted: " + path);
+            throw new IOException("Folder could not be deleted: " + path);
         }
     }
 
-    void deleteFiles(File[] contents) throws FileManagerException {
+    void deleteFiles(File[] contents) throws IOException {
         if (contents != null) {
             for (File file : contents) {
                 if (file.isDirectory()) {
                     deleteDirectory(file.getAbsolutePath());
                 } else {
                     if (!file.delete()) {
-                        throw new FileManagerException("File could not be deleted: " + file.getName());
+                        throw new IOException("File could not be deleted: " + file.getName());
                     }
                 }
             }
