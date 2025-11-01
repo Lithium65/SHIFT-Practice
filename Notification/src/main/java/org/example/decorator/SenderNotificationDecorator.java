@@ -1,16 +1,19 @@
 package org.example.decorator;
 
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.NotificationType;
 import org.example.sender.NotificationSender;
 
 @Slf4j
-@RequiredArgsConstructor
+
 public class SenderNotificationDecorator implements NotificationSender {
 
     private final NotificationSender notificationSender;
+
+    public SenderNotificationDecorator(NotificationSender notificationSender) {
+        this.notificationSender = notificationSender;
+    }
 
     @Override
     public void sendNotification() {
