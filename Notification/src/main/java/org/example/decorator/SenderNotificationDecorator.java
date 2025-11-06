@@ -3,6 +3,7 @@ package org.example.decorator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.NotificationType;
+import org.example.builder.Notification;
 import org.example.sender.NotificationSender;
 
 @Slf4j
@@ -16,10 +17,10 @@ public class SenderNotificationDecorator implements NotificationSender {
     }
 
     @Override
-    public void sendNotification() {
+    public void sendNotification(Notification notification) {
         NotificationType notificationType = getNotificationType();
         log.info("Задан тип уведомления: {}", notificationType);
-        notificationSender.sendNotification();
+        notificationSender.sendNotification(notification);
         log.info("Уведомления типа {} было успешно отправлено", getNotificationType());
     }
 

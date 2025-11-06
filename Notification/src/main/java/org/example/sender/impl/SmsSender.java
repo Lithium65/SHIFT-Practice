@@ -1,6 +1,7 @@
 package org.example.sender.impl;
 
 import org.example.NotificationType;
+import org.example.builder.Notification;
 import org.example.sender.NotificationSender;
 
 public class SmsSender implements NotificationSender {
@@ -11,8 +12,8 @@ public class SmsSender implements NotificationSender {
     }
 
     @Override
-    public void sendNotification() {
-        System.out.println("SMS отправлено");
+    public void sendNotification(Notification notification) {
+        System.out.println(notification.getNotification());
     }
 
 }
