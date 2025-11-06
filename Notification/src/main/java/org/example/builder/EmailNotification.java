@@ -1,12 +1,15 @@
 package org.example.builder;
 
+import org.example.NotificationType;
+
 import java.io.InputStream;
 
 public class EmailNotification extends Notification {
     private final InputStream attachment;
     private final String subject;
+    private static final NotificationType NOTIFICATIONTYPE = NotificationType.EMAIL;
 
-    public EmailNotification(String recipient, String subject,  String message, InputStream attachment) {
+    EmailNotification(String recipient, String subject,  String message, InputStream attachment) {
         super(recipient, message);
         this.attachment = attachment;
         this.subject = subject;
@@ -27,6 +30,10 @@ public class EmailNotification extends Notification {
 
     public String getSubject() {
         return subject;
+    }
+
+    public NotificationType getNotificationType() {
+        return NOTIFICATIONTYPE;
     }
 
 }

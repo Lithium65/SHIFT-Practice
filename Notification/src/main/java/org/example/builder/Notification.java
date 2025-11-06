@@ -1,5 +1,7 @@
 package org.example.builder;
 
+import org.example.NotificationType;
+
 public abstract class Notification{
     private String recipient;
     private String message;
@@ -26,5 +28,7 @@ public abstract class Notification{
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public abstract NotificationType getNotificationType();
 }
 
