@@ -1,6 +1,6 @@
 package org.example.builder;
 
-public abstract class Notification implements NotificationBuilder{
+public abstract class Notification{
     private String recipient;
     private String message;
 

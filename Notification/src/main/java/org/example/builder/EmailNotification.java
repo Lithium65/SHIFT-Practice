@@ -25,25 +25,9 @@ public class EmailNotification extends Notification {
         return sb.toString();
     }
 
-    @Override
-    public EmailNotification build() {
-        return new EmailNotification(getRecipient(), getSubject(), getMessage(), getAttachment());
-    }
-
-    @Override
-    public NotificationBuilder withMessage(String message) {
-        setMessage(message);
-        return this;
-    }
-
     public String getSubject() {
         return subject;
     }
 
-    @Override
-    public NotificationBuilder to(String recipient) {
-        setRecipient(recipient);
-        return this;
-    }
 }
 
