@@ -5,7 +5,7 @@ import java.io.InputStream;
 public class EmailNotification extends Notification {
     private final InputStream attachment;
 
-    public EmailNotification(String recipient, String message, InputStream attachment) {
+    public EmailNotification(String recipient, String subject,  String message, InputStream attachment) {
         super(recipient, message);
         this.attachment = attachment;
     }

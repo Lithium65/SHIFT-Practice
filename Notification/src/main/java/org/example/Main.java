@@ -1,13 +1,12 @@
 package org.example;
 
-import lombok.extern.slf4j.Slf4j;
+import org.example.builder.Notification;
 import org.example.builder.NotificationBuilder;
-import org.example.builder.SmsNotification;
 import org.example.factory.impl.SignInSenderFactory;
 import org.example.sender.NotificationSender;
 import org.example.sender.resolver.SenderResolver;
 
-@Slf4j
+
 public class Main {
 
     public static void main(String[] args) {
@@ -15,8 +14,9 @@ public class Main {
 
         NotificationSender notificationSender = senderResolver.getSender(NotificationType.SMS);
         NotificationBuilder builder = new NotificationBuilder();
-        SmsNotification sms = builder
-                .to("+375292564221")
+
+       Notification sms = builder
+                .to("+375291234678")
                 .withMessage("Your code is 123456")
                 .buildSms();
 

@@ -10,8 +10,13 @@ public class TelegramNotification extends Notification {
         this.image = image;
     }
 
-    public String getEmoji() { return emoji; }
-    public byte[] getImage() { return image; }
+    public String getEmoji() {
+        return emoji;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
 
 
     @Override

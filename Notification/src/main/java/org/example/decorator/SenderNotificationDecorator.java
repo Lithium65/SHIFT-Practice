@@ -1,15 +1,13 @@
 package org.example.decorator;
 
-
-import lombok.extern.slf4j.Slf4j;
 import org.example.NotificationType;
 import org.example.builder.Notification;
 import org.example.sender.NotificationSender;
-
-@Slf4j
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SenderNotificationDecorator implements NotificationSender {
-
+    Logger logger = LoggerFactory.getLogger(SenderNotificationDecorator.class);
     private final NotificationSender notificationSender;
 
     public SenderNotificationDecorator(NotificationSender notificationSender) {
@@ -19,9 +17,9 @@ public class SenderNotificationDecorator implements NotificationSender {
     @Override
     public void sendNotification(Notification notification) {
         NotificationType notificationType = getNotificationType();
-        log.info("Задан тип уведомления: {}", notificationType);
+        logger.info("Задан тип уведомления: {}", notificationType);
         notificationSender.sendNotification(notification);
-        log.info("Уведомления типа {} было успешно отправлено", getNotificationType());
+        logger.info("Уведомления типа {} было успешно отправлено", getNotificationType());
     }
 
     @Override
