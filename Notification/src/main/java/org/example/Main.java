@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.builder.Notification;
 import org.example.builder.NotificationBuilder;
+import org.example.builder.SmsNotificationBuilder;
 import org.example.factory.impl.SignInSenderFactory;
 import org.example.sender.NotificationSender;
 import org.example.sender.resolver.SenderResolver;
@@ -13,7 +14,7 @@ public class Main {
         SenderResolver senderResolver = new SenderResolver(new SignInSenderFactory());
 
         NotificationSender notificationSender = senderResolver.getSender(NotificationType.SMS);
-        builder = new NotificationBuilder();
+        SmsNotificationBuilder builder = new SmsNotificationBuilder();
 
        Notification sms = builder
                 .to("+375291234678")

@@ -1,6 +1,6 @@
 package org.example.builder;
 
-public class SmsNotificationBuilder {
+public class SmsNotificationBuilder implements NotificationBuilder {
   private String recipient;
   private String message;
 

@@ -1,6 +1,6 @@
 package org.example.builder;
 
-public class TelegramNotificationBuilder {
+public class TelegramNotificationBuilder implements NotificationBuilder {
   private String recipient;
   private String message;
   private String emoji;

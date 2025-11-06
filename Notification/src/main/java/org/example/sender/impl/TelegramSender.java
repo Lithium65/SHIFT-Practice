@@ -8,7 +8,7 @@ import org.example.sender.NotificationSender;
 public class TelegramSender implements NotificationSender {
 
     @Override
-    public void sendNotification(TelegramNotification notification) {
+    public void sendNotification(Notification notification) {
         System.out.println(notification.getNotification());
     }
 

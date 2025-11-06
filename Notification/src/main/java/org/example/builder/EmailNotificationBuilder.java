@@ -2,10 +2,11 @@ package org.example.builder;
 
 import java.io.InputStream;
 
-public class EmailNotificationBuilder {
+public class EmailNotificationBuilder implements NotificationBuilder {
   private String recipient;
   private String message;
   private InputStream attachment;
+  private String subject;
 
   public EmailNotificationBuilder to(String recipient) {
     this.recipient = recipient;
@@ -23,6 +24,11 @@ public class EmailNotificationBuilder {
   }
 
   public EmailNotification build() {
-    return new EmailNotification(recipient, message, attachment);
+    return new EmailNotification(recipient, subject, message, attachment);
+  }
+
+  public EmailNotificationBuilder withSubject(String subject) {
+    this.subject = subject;
+    return this;
   }
 }
