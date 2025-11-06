@@ -3,48 +3,25 @@ package org.example.builder;
 
 import java.io.InputStream;
 
-public class NotificationBuilder {
-    private String recipient;
-    private String message;
-    private InputStream attachment;
-    private String emoji;
-    private byte[] image;
+public interface NotificationBuilder {
+//    private String recipient;
+//    private String message;
+//    private InputStream attachment;
+//    private String emoji;
+//    private byte[] image;
 
-    public NotificationBuilder to(String recipient) {
-        this.recipient = recipient;
-        return this;
-    }
+    NotificationBuilder to(String recipient);
 
-    public NotificationBuilder withMessage(String message) {
-        this.message = message;
-        return this;
-    }
+    NotificationBuilder withMessage(String message);
 
-    public NotificationBuilder withAttachment(InputStream attachment) {
-        this.attachment = attachment;
-        return this;
-    }
+    Notification build();
 
-    public NotificationBuilder withEmoji(String emoji) {
-        this.emoji = emoji;
-        return this;
-    }
-
-    public NotificationBuilder withImage(byte[] image) {
-        this.image = image;
-        return this;
-    }
-
-    public EmailNotification buildEmail() {
-        return new EmailNotification(recipient, message, attachment);
-    }
-
-    public TelegramNotification buildTelegram() {
-        return new TelegramNotification(recipient, message, emoji, image);
-    }
-
-    public SmsNotification buildSms() {
-        return new SmsNotification(recipient, message);
-    }
+//    public TelegramNotification build() {
+//        return new TelegramNotification(recipient, message, emoji, image);
+//    }
+//
+//    public SmsNotification build() {
+//        return new SmsNotification(recipient, message);
+//    }
 }
 

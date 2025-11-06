@@ -1,8 +1,8 @@
 package org.example.builder;
 
-public abstract class Notification {
-    private final String recipient;
-    private final String message;
+public abstract class Notification implements NotificationBuilder{
+    private String recipient;
+    private String message;
 
     protected Notification(String recipient, String message) {
         this.recipient = recipient;
@@ -18,5 +18,13 @@ public abstract class Notification {
     }
 
     public abstract String getNotification();
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
 

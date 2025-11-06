@@ -27,4 +27,22 @@ public class TelegramNotification extends Notification {
         sb.append("Image: ").append(image != null ? "attached" : "none");
         return sb.toString();
     }
+
+
+    @Override
+    public TelegramNotification build() {
+        return new TelegramNotification(getRecipient(), getMessage(), getEmoji(), getImage());
+    }
+
+    @Override
+    public NotificationBuilder withMessage(String message) {
+        setMessage(message);
+        return this;
+    }
+
+    @Override
+    public NotificationBuilder to(String recipient) {
+        setRecipient(recipient);
+        return this;
+    }
 }

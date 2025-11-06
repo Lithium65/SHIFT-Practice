@@ -13,12 +13,12 @@ public class Main {
         SenderResolver senderResolver = new SenderResolver(new SignInSenderFactory());
 
         NotificationSender notificationSender = senderResolver.getSender(NotificationType.SMS);
-        NotificationBuilder builder = new NotificationBuilder();
+        builder = new NotificationBuilder();
 
        Notification sms = builder
                 .to("+375291234678")
                 .withMessage("Your code is 123456")
-                .buildSms();
+                .build();
 
         notificationSender.sendNotification(sms);
     }
