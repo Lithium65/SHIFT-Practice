@@ -1,6 +1,7 @@
 package org.example.builder;
 
 import org.example.NotificationType;
+import org.example.validator.SmsNotificationValidator;
 
 public class SmsNotification extends Notification {
 
@@ -39,6 +40,9 @@ public class SmsNotification extends Notification {
         }
 
         public SmsNotification build() {
+            SmsNotification notification = new SmsNotification(this);
+            SmsNotificationValidator validator = new SmsNotificationValidator();
+            validator.validate(notification);
             return new SmsNotification(this);
         }
     }

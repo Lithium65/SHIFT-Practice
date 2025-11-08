@@ -6,4 +6,7 @@ public class NotificationValidationException extends RuntimeException {
         super(message);
     }
 
+    public NotificationValidationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
