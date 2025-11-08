@@ -2,13 +2,21 @@ package org.example.builder;
 
 import org.example.NotificationType;
 
-public abstract class Notification{
-    private String recipient;
-    private String message;
+public abstract class Notification {
+    private final String sender;
+    private final String recipient;
+    private final String message;
+    private final NotificationType type;
 
-    protected Notification(String recipient, String message) {
+    protected Notification(String sender, String recipient, String message, NotificationType type) {
+        this.sender = sender;
         this.recipient = recipient;
         this.message = message;
+        this.type = type;
+    }
+
+    public String getSender() {
+        return sender;
     }
 
     public String getRecipient() {
@@ -19,16 +27,12 @@ public abstract class Notification{
         return message;
     }
 
+    public NotificationType getType() {
+        return type;
+    }
+
     public abstract String getNotification();
 
-    public void setRecipient(String recipient) {
-        this.recipient = recipient;
-    }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public abstract NotificationType getNotificationType();
 }
 
