@@ -1,6 +1,7 @@
 package org.example.builder;
 
 import org.example.NotificationType;
+import org.example.validator.EmailNotificationValidator;
 
 import java.io.InputStream;
 
@@ -58,7 +59,10 @@ public class EmailNotification extends Notification {
         }
 
         public EmailNotification build() {
-            return new EmailNotification(this);
+            EmailNotification notification = new EmailNotification(this);
+            EmailNotificationValidator validator = new EmailNotificationValidator();
+            validator.validate(notification);
+            return notification;
         }
 
 
