@@ -1,10 +1,10 @@
 package org.example.sender.impl;
 
 import org.example.NotificationType;
-import org.example.builder.Notification;
+import org.example.builder.SmsNotification;
 import org.example.sender.NotificationSender;
 
-public class SmsSender implements NotificationSender {
+public class SmsSender implements NotificationSender<SmsNotification> {
 
     @Override
     public NotificationType getNotificationType() {
@@ -12,7 +12,7 @@ public class SmsSender implements NotificationSender {
     }
 
     @Override
-    public void sendNotification(Notification notification) {
+    public void sendNotification(SmsNotification notification) {
         System.out.println(notification.getNotification());
     }
 

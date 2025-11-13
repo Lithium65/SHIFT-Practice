@@ -1,6 +1,7 @@
 package org.example.builder;
 
 import org.example.NotificationType;
+import org.example.validator.TelegramNotificationValidator;
 
 public class TelegramNotification extends Notification {
     private final String emoji;
@@ -65,6 +66,9 @@ public class TelegramNotification extends Notification {
         }
 
         public TelegramNotification build() {
+            TelegramNotification notification = new TelegramNotification(this);
+            TelegramNotificationValidator validator = new TelegramNotificationValidator();
+            validator.validate(notification);
             return new TelegramNotification(this);
         }
     }
