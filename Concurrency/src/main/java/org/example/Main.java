@@ -8,10 +8,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
-    public static AtomicInteger num = new AtomicInteger(0);
+    public static int num = 0;
     private static ExecutorService executor = Executors.newFixedThreadPool(10);
+    private static ReentrantLock lock = new ReentrantLock();
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         List<Future<Integer>> futures = new ArrayList<>();
@@ -19,9 +21,11 @@ public class Main {
         for (int i = 0; i < 10; i++) {
             Callable<Integer> task = () -> {
                 for (int j = 0; j < 10000; j++) {
-                    num.incrementAndGet();
+                    lock.lock();
+                    num++;
+                    lock.unlock();
                 }
-                return num.get();
+                return num;
             };
             futures.add(executor.submit(task));
         }
@@ -32,6 +36,6 @@ public class Main {
 
         executor.shutdown();
 
-        System.out.println("Final value: " + num.get());
+        System.out.println("Final value: " + num);
     }
 }
