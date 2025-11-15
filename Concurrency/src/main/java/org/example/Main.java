@@ -1,41 +1,38 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static int num = 0;
-    private static ExecutorService executor = Executors.newFixedThreadPool(10);
     private static ReentrantLock lock = new ReentrantLock();
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
-        List<Future<Integer>> futures = new ArrayList<>();
+    public static void main(String[] args) throws InterruptedException {
+        int threadCount = new Random().nextInt(11) + 5;
+        int incrementsPerThread = 10000 / threadCount;
+        int remainder = 10000 % threadCount;
 
-        for (int i = 0; i < 10; i++) {
-            Callable<Integer> task = () -> {
-                for (int j = 0; j < 10000; j++) {
+        ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+        CountDownLatch latch = new CountDownLatch(threadCount);
+
+        for (int i = 0; i < threadCount; i++) {
+            int increments = incrementsPerThread + (i < remainder ? 1 : 0);
+            executor.submit(() -> {
+                for (int j = 0; j < increments; j++) {
                     lock.lock();
                     num++;
                     lock.unlock();
                 }
-                return num;
-            };
-            futures.add(executor.submit(task));
+                latch.countDown();
+            });
         }
 
-        for (Future<Integer> future : futures) {
-            future.get();
-        }
-
+        latch.await();
         executor.shutdown();
 
-        System.out.println("Final value: " + num);
+        System.out.println("Final num: " + num);
     }
 }
